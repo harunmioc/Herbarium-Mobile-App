@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,14 +22,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var spinoza: Spinner
     private var trenutnaDuzinaListe: Int = biljkeList.size
     private var trenutniMod = "Medicinski"
+    private lateinit var resetButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-    //dohvacanje id-a RecyclerView-a i Spinner-a
+    //dohvacanje id-a RecyclerView-a, Spinner-a i Button-a
         RecyclerViewMain = findViewById(R.id.RecyclerViewMain)
         spinoza = findViewById(R.id.spinner)
+        resetButton = findViewById(R.id.resetBtn)
     //Dodavanje opcija u Spinner
         val arraySpinner = arrayOf(
             "Medicinski", "Kuharski", "Botanički"
@@ -99,6 +102,20 @@ class MainActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         }
+
+
+        resetButton.setOnClickListener(object: View.OnClickListener {
+            override fun onClick(v: View?) {
+                if(trenutniMod == "Medicinski")
+                    medicinskiAdapter.updateBiljke(biljke)
+                else if(trenutniMod == "Kuharski")
+                    kuharskiAdapter.updateBiljke(biljke)
+                else
+                    botanickiAdapter.updateBiljke(biljke)
+            }
+        })
+
+
     }
 
 
@@ -170,4 +187,9 @@ class MainActivity : AppCompatActivity() {
         else
             botanickiAdapter.updateBiljke(listBiljke)
     }
+
+
+
+
+
 }

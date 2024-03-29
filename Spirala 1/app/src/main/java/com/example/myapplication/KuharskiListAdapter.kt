@@ -45,7 +45,7 @@ class KuharskiListAdapter(private var biljke : List<Biljka>, private val onItemC
         val context: Context = holder.biljkaImage.context
         var id: Int = context.resources.getIdentifier(biljke[position].naziv, "drawable", context.packageName)
         if (id==0) id=context.resources
-            .getIdentifier("ic_launcher_background", "drawable", context.packageName)
+            .getIdentifier("nana", "drawable", context.packageName)
         holder.biljkaImage.setImageResource(id)
 
         holder.itemView.setOnClickListener{ onItemClicked(biljke[position]) }
