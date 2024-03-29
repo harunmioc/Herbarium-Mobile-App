@@ -8,7 +8,7 @@ data class Biljka(
     val profilOkusa : ProfilOkusaBiljke,
     val jela : List<String>,
     val klimatskiTipovi : List<KlimatskiTip>,
-    val zemljisniTipovi : List<Zemljiste>,
+    val zemljaniTipovi : List<Zemljiste>,
 
 )
 

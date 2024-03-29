@@ -9,7 +9,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.BEZUKUSNO,
         jela = listOf("Salata od paradajza", "Punjene tikvice"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUBTROPSKA),
-        zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA)
+        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA)
     ),
     Biljka(
         naziv = "Nana (Mentha spicata)",
@@ -19,7 +19,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.MENTA,
         jela = listOf("Jogurt sa voćem", "Gulaš"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.UMJERENA),
-        zemljisniTipovi = listOf(Zemljiste.GLINENO, Zemljiste.CRNICA)
+        zemljaniTipovi = listOf(Zemljiste.GLINENO, Zemljiste.CRNICA)
     ),
     Biljka(
         naziv = "Kamilica (Matricaria chamomilla)",
@@ -29,7 +29,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.AROMATICNO,
         jela = listOf("Čaj od kamilice"),
         klimatskiTipovi = listOf(KlimatskiTip.UMJERENA, KlimatskiTip.SUBTROPSKA),
-        zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.KRECNJACKO)
+        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.KRECNJACKO)
     ),
     Biljka(
         naziv = "Ružmarin (Rosmarinus officinalis)",
@@ -39,7 +39,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.AROMATICNO,
         jela = listOf("Pečeno pile", "Grah","Gulaš"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUHA),
-        zemljisniTipovi = listOf(Zemljiste.SLJUNKOVITO, Zemljiste.KRECNJACKO)
+        zemljaniTipovi = listOf(Zemljiste.SLJUNKOVITO, Zemljiste.KRECNJACKO)
     ),
     Biljka(
         naziv = "Lavanda (Lavandula angustifolia)",
@@ -49,7 +49,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.AROMATICNO,
         jela = listOf("Jogurt sa voćem"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUHA),
-        zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.KRECNJACKO)
+        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.KRECNJACKO)
     ),
     Biljka(
         naziv = "Peršun (Petroselinum crispum)",
@@ -59,7 +59,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.BEZUKUSNO,
         jela = listOf("Salata", "Juha/Supa", "Besamel umak", "Odrezak"),
         klimatskiTipovi = listOf(KlimatskiTip.UMJERENA),
-        zemljisniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.CRNICA)
+        zemljaniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.CRNICA)
     ),
     Biljka(
         naziv = "Matičnjak (Melissa officinalis)",
@@ -69,7 +69,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.AROMATICNO,
         jela = listOf("Salata", "Juha/Supa", "Besamel umak", "Odrezak"),
         klimatskiTipovi = listOf(KlimatskiTip.UMJERENA),
-        zemljisniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.CRNICA)
+        zemljaniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.CRNICA)
     ),
     Biljka(
         naziv = "Kurkuma (Curcuma longa)",
@@ -79,7 +79,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.GORKO,
         jela = listOf("Curry", "Juha/Supa", "Marinirana piletina s kurkumom i limunom", "Riža"),
         klimatskiTipovi = listOf(KlimatskiTip.TROPSKA),
-        zemljisniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.GLINENO)
+        zemljaniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.GLINENO)
     ),
     Biljka(
         naziv = "Majčina dušica (Thymus serpyllum)",
@@ -89,7 +89,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.GORKO,
         jela = listOf("Pasta","Lazanja","Pizza"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.UMJERENA),
-        zemljisniTipovi = listOf(Zemljiste.PJESKOVITO)
+        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO)
     ),
     Biljka(
         naziv = "Origano (Origanum vulgare)",
@@ -99,7 +99,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.LJUTO,
         jela = listOf("Pizza","Lazanja","Lazanja"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.UMJERENA),
-        zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA)
+        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA)
     )
 )
 
