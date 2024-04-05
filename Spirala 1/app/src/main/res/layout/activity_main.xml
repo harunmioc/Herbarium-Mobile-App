@@ -9,19 +9,19 @@
     tools:context=".MainActivity">
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/modSpinner"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/RecyclerViewMain"
+        app:layout_constraintBottom_toTopOf="@+id/biljkeRV"
         app:layout_constraintEnd_toStartOf="@+id/resetBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerViewMain"
+        android:id="@+id/biljkeRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/modSpinner"
         app:spanCount="1" />
 
     <Button
@@ -41,9 +41,9 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="Reset"
-        app:layout_constraintBottom_toTopOf="@+id/RecyclerViewMain"
+        app:layout_constraintBottom_toTopOf="@+id/biljkeRV"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toEndOf="@+id/modSpinner"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

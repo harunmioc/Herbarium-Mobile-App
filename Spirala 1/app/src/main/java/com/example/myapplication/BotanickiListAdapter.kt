@@ -28,25 +28,10 @@ class BotanickiListAdapter (private var biljke : List<Biljka>, private val onIte
     }
 
     override fun onBindViewHolder(holder: BiljkaViewHolder, position: Int) {
-        var klima: String = String()
-        var zemlja: String = String()
-        for(i in biljke[position].klimatskiTipovi){
-            if(i == biljke[position].klimatskiTipovi.last())
-                zemlja += i.opis
-            else
-                zemlja += i.opis+", "
-        }
-        for(i in biljke[position].zemljaniTipovi){
-            if(i == biljke[position].zemljaniTipovi.last())
-                zemlja += i.naziv
-            else
-                zemlja += i.naziv+", "
-        }
-
         holder.biljkaNaziv.text = biljke[position].naziv
         holder.biljkaPorodica.text = biljke[position].porodica
-        holder.biljkaKlima.text = klima
-        holder.biljkaZemlja.text = zemlja
+        holder.biljkaKlima.text = biljke[position].klimatskiTipovi.first().opis
+        holder.biljkaZemlja.text = biljke[position].zemljisniTipovi.first().naziv
 
         val context: Context = holder.biljkaImage.context
         var id: Int = context.resources.getIdentifier(biljke[position].naziv, "drawable", context.packageName)
@@ -66,34 +51,5 @@ class BotanickiListAdapter (private var biljke : List<Biljka>, private val onIte
         notifyDataSetChanged()
     }
 
-     fun onClickUpdateBiljke(biljka : Biljka){
-        var slicneBiljke : ArrayList<Biljka> = ArrayList()
-        slicneBiljke.add(biljka)
-        var klimatski :Boolean = false
-        var zemljisni :Boolean = false
-        for(i in biljke){
-            klimatski = false
-            zemljisni = false
-            if(i != biljka && i.porodica==biljka.porodica) {
-                for (j in i.klimatskiTipovi)
-                    if(biljka.klimatskiTipovi.contains(j)){
-                        klimatski = true
-                        continue
-                    }
 
-
-
-                for(j in i.zemljaniTipovi)
-                    for(j in i.zemljaniTipovi)
-                        if(biljka.zemljaniTipovi.contains(j)){
-                            klimatski = true
-                            continue
-                        }
-                if(zemljisni && klimatski)
-                    slicneBiljke.add(i)
-            }
-        }
-        var listBiljke:List<Biljka> = slicneBiljke
-        updateBiljke(listBiljke)
-    }
 }

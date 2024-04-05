@@ -37,7 +37,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toEndOf="@+id/slikaItem"
-            app:layout_constraintTop_toBottomOf="@+id/nazivItem" />
+            app:layout_constraintTop_toBottomOf="@+id/nazivItem"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/nazivItem"
@@ -51,7 +53,9 @@
             app:layout_constraintBottom_toTopOf="@+id/porodicaItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slikaItem"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/klimatskiTipItem"
@@ -62,11 +66,13 @@
             android:layout_marginEnd="15dp"
             android:maxLines="2"
             android:text="TextView"
-            android:textSize="8sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/zemljisniTipItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slikaItem"
-            app:layout_constraintTop_toBottomOf="@+id/porodicaItem" />
+            app:layout_constraintTop_toBottomOf="@+id/porodicaItem"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/zemljisniTipItem"
@@ -80,6 +86,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/slikaItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slikaItem"
-            app:layout_constraintTop_toBottomOf="@+id/klimatskiTipItem" />
+            app:layout_constraintTop_toBottomOf="@+id/klimatskiTipItem"
+            android:ellipsize="end"
+            android:singleLine="true"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

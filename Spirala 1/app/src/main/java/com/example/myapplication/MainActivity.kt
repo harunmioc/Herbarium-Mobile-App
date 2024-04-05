@@ -1,9 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -20,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var botanickiAdapter : BotanickiListAdapter
     private var biljkeList = dajBiljke()
     private lateinit var spinoza: Spinner
-    private var trenutnaDuzinaListe: Int = biljkeList.size
+
     private var trenutniMod = "Medicinski"
     private lateinit var resetButton: Button
 
@@ -29,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
     //dohvacanje id-a RecyclerView-a, Spinner-a i Button-a
-        RecyclerViewMain = findViewById(R.id.RecyclerViewMain)
-        spinoza = findViewById(R.id.spinner)
+        RecyclerViewMain = findViewById(R.id.biljkeRV)
+        spinoza = findViewById(R.id.modSpinner)
         resetButton = findViewById(R.id.resetBtn)
     //Dodavanje opcija u Spinner
         val arraySpinner = arrayOf(
@@ -55,46 +53,16 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if(spinoza.selectedItem.toString() == "Medicinski") {
                     RecyclerViewMain.adapter =medicinskiAdapter
-                    if(trenutnaDuzinaListe != biljkeList.size) {
-                        if(trenutniMod == "Kuharski"){
-                            medicinskiAdapter.updateBiljke(kuharskiAdapter.dajListu())
-                        }else if( trenutniMod == "Botanički"){
-                            medicinskiAdapter.updateBiljke(botanickiAdapter.dajListu())
-                        }
-                    }else {
-                        medicinskiAdapter.updateBiljke(biljkeList)
-                    }
+                    medicinskiAdapter.updateBiljke(biljkeList)
                     trenutniMod = "Medicinski"
                 }
                 else if(spinoza.selectedItem.toString() == "Kuharski"){
                     RecyclerViewMain.adapter = kuharskiAdapter
-                    if(trenutnaDuzinaListe != biljkeList.size) {
-                        println("KUHARSKI TACNO")
-                        if(trenutniMod == "Medicinski"){
-                            kuharskiAdapter.updateBiljke(medicinskiAdapter.dajListu())
-                        }else if( trenutniMod == "Botanički"){
-                            kuharskiAdapter.updateBiljke(botanickiAdapter.dajListu())
-                        }
-                    }else {
-                        println("BOTANICKI TACNO")
-
-                        kuharskiAdapter.updateBiljke(biljkeList)
-                    }
+                    kuharskiAdapter.updateBiljke(biljkeList)
                     trenutniMod = "Kuharski"
                 }else{
                     RecyclerViewMain.adapter = botanickiAdapter
-                    if(trenutnaDuzinaListe != biljkeList.size) {
-                        println("BOTANICKI TACNO")
-                        if(trenutniMod == "Kuharski"){
-                            botanickiAdapter.updateBiljke(kuharskiAdapter.dajListu())
-                        }else if( trenutniMod == "Medicinski"){
-                            botanickiAdapter.updateBiljke(medicinskiAdapter.dajListu())
-                        }
-                    }else {
-                        println("BOTANICKI NETACNO")
-
-                        botanickiAdapter.updateBiljke(biljkeList)
-                    }
+                    botanickiAdapter.updateBiljke(biljkeList)
                     trenutniMod = "Botanički"
                 }
             }
@@ -104,14 +72,15 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         resetButton.setOnClickListener(object: View.OnClickListener {
             override fun onClick(v: View?) {
                 if(trenutniMod == "Medicinski")
-                    medicinskiAdapter.updateBiljke(biljke)
+                    medicinskiAdapter.updateBiljke(dajBiljke())
                 else if(trenutniMod == "Kuharski")
-                    kuharskiAdapter.updateBiljke(biljke)
+                    kuharskiAdapter.updateBiljke(dajBiljke())
                 else
-                    botanickiAdapter.updateBiljke(biljke)
+                    botanickiAdapter.updateBiljke(dajBiljke())
             }
         })
 
@@ -120,72 +89,20 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun onClickUpdateBiljke(biljka : Biljka){
-        var slicneBiljke : ArrayList<Biljka> = ArrayList()
-        slicneBiljke.add(biljka)
-
-    //medicinski
+//medicinski
         if(trenutniMod == "Medicinski") {
-            for (i in biljke) {
-                if (i != biljka) {
-                    for (j in i.medicinskeKoristi) {
-                        if (biljka.medicinskeKoristi.contains(j)) {
-                            slicneBiljke.add(i)
-                            break
-                        }
-                    }
-                }
-            }
-//kuharski
-        }else if(trenutniMod == "Kuharski") {
-            var jela: Boolean = false
-            for (i in biljke) {
-                jela = false
-                if (i != biljka) {
-                    for (j in i.jela) {
-                        if (biljka.jela.contains(j)) {
-                            jela = true
-                            continue
-                        }
-                    }
-                    if (jela || i.profilOkusa == biljka.profilOkusa) {
-                        slicneBiljke.add(i)
-                    }
-                }
-            }
+            biljkeList = dajBiljke().filter { it -> it.medicinskeKoristi.any { korist -> korist in biljka.medicinskeKoristi }}
+            medicinskiAdapter.updateBiljke(biljkeList)
 //botanicki
+        }else if(trenutniMod == "Botanički") {
+            biljkeList = dajBiljke().filter { it -> it.porodica == biljka.porodica && it.klimatskiTipovi.any { tip -> tip in biljka.klimatskiTipovi} &&
+                    it.zemljisniTipovi.any {tip -> tip in biljka.zemljisniTipovi}}
+            botanickiAdapter.updateBiljke(biljkeList)
+//kuharski
         }else {
-
-            var klimatski: Boolean = false
-            var zemljisni: Boolean = false
-            for (i in biljke) {
-                klimatski = false
-                zemljisni = false
-                if (i != biljka && i.porodica == biljka.porodica) {
-                    for (j in i.klimatskiTipovi)
-                        if (biljka.klimatskiTipovi.contains(j)) {
-                            klimatski = true
-                            continue
-                        }
-                    for (j in i.zemljaniTipovi)
-                        for (j in i.zemljaniTipovi)
-                            if (biljka.zemljaniTipovi.contains(j)) {
-                                klimatski = true
-                                continue
-                            }
-                    if (zemljisni && klimatski)
-                        slicneBiljke.add(i)
-                }
-            }
+            biljkeList = dajBiljke().filter { it -> it.jela.any { jelo -> jelo in biljka.jela} || it.profilOkusa == biljka.profilOkusa}
+            kuharskiAdapter.updateBiljke(biljkeList)
         }
-
-        var listBiljke: List<Biljka> = slicneBiljke
-        trenutnaDuzinaListe = listBiljke.size
-        if(trenutniMod == "Medicinski")
-            medicinskiAdapter.updateBiljke(listBiljke)
-        else if(trenutniMod == "Kuharski")
-            kuharskiAdapter.updateBiljke(listBiljke)
-        else
-            botanickiAdapter.updateBiljke(listBiljke)
     }
 
 

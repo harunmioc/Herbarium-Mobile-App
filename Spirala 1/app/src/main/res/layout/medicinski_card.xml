@@ -36,7 +36,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toEndOf="@+id/slikaItem"
-            app:layout_constraintTop_toBottomOf="@+id/nazivItem" />
+            app:layout_constraintTop_toBottomOf="@+id/nazivItem"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/korist1Item"
@@ -47,10 +49,13 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:text="TextView"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/slikaItem"
             app:layout_constraintEnd_toStartOf="@+id/korist2Item"
             app:layout_constraintStart_toEndOf="@+id/slikaItem"
-            app:layout_constraintTop_toBottomOf="@+id/upozorenjeItem" />
+            app:layout_constraintTop_toBottomOf="@+id/upozorenjeItem"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/korist2Item"
@@ -62,7 +67,9 @@
             app:layout_constraintBottom_toBottomOf="@+id/korist1Item"
             app:layout_constraintEnd_toStartOf="@+id/korist3Item"
             app:layout_constraintStart_toEndOf="@+id/korist1Item"
-            app:layout_constraintTop_toBottomOf="@+id/upozorenjeItem" />
+            app:layout_constraintTop_toBottomOf="@+id/upozorenjeItem"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/korist3Item"
@@ -74,7 +81,9 @@
             app:layout_constraintBottom_toBottomOf="@+id/korist2Item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/korist2Item"
-            app:layout_constraintTop_toBottomOf="@+id/upozorenjeItem" />
+            app:layout_constraintTop_toBottomOf="@+id/upozorenjeItem"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/nazivItem"
@@ -87,6 +96,8 @@
             app:layout_constraintBottom_toTopOf="@+id/upozorenjeItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slikaItem"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:ellipsize="end"
+            android:singleLine="true"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

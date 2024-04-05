@@ -8,10 +8,5 @@ data class Biljka(
     val profilOkusa : ProfilOkusaBiljke,
     val jela : List<String>,
     val klimatskiTipovi : List<KlimatskiTip>,
-    val zemljaniTipovi : List<Zemljiste>,
-
+    val zemljisniTipovi  : List<Zemljiste>,
 )
-
-fun dajBiljke():List<Biljka>{
-    return biljke
-}

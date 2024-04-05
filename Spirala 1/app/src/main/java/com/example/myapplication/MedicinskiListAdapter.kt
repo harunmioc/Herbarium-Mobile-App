@@ -33,8 +33,8 @@ class MedicinskiListAdapter(private var biljke: List<Biljka>, private val onItem
         holder.biljkaNaziv.text = biljke[position].naziv
         holder.biljkaUpozorenje.text = biljke.get(position).medicinskoUpozorenje
 
-
-            holder.biljkaKorist1.text = biljke[position].medicinskeKoristi[0].opis
+//potrebna bolja implementacija
+        holder.biljkaKorist1.text = biljke[position].medicinskeKoristi[0].opis
         if(1<biljke[position].medicinskeKoristi.size){
             holder.biljkaKorist2.text = biljke[position].medicinskeKoristi[1].opis
         }else {
@@ -64,21 +64,4 @@ class MedicinskiListAdapter(private var biljke: List<Biljka>, private val onItem
         return biljke
     }
 
-     fun onClickUpdateBiljke(biljka : Biljka){
-        var slicneBiljke : ArrayList<Biljka> = ArrayList()
-        slicneBiljke.add(biljka)
-
-        for(i in biljke){
-            if(i != biljka) {
-                for (j in i.medicinskeKoristi) {
-                    if (biljka.medicinskeKoristi.contains(j)) {
-                        slicneBiljke.add(i)
-                        break
-                    }
-                }
-            }
-        }
-        var listBiljke:List<Biljka> = slicneBiljke
-       updateBiljke(listBiljke)
-    }
 }

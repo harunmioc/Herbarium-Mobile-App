@@ -14,9 +14,9 @@ class KuharskiListAdapter(private var biljke : List<Biljka>, private val onItemC
         val biljkaImage: ImageView = itemView.findViewById(R.id.slikaItem)
         val biljkaNaziv: TextView = itemView.findViewById(R.id.nazivItem)
         val biljkaOkus: TextView = itemView.findViewById(R.id.profilOkusaItem)
-        val biljkaKorist1: TextView = itemView.findViewById(R.id.jelo1Item)
-        val biljkaKorist2: TextView = itemView.findViewById(R.id.jelo2Item)
-        val biljkaKorist3: TextView = itemView.findViewById(R.id.jelo3Item)
+        val biljkaJelo1: TextView = itemView.findViewById(R.id.jelo1Item)
+        val biljkaJelo2: TextView = itemView.findViewById(R.id.jelo2Item)
+        val biljkaJelo3: TextView = itemView.findViewById(R.id.jelo3Item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BiljkaViewHolder {
@@ -31,16 +31,16 @@ class KuharskiListAdapter(private var biljke : List<Biljka>, private val onItemC
     override fun onBindViewHolder(holder: BiljkaViewHolder, position: Int) {
         holder.biljkaNaziv.text = biljke[position].naziv
         holder.biljkaOkus.text = biljke[position].profilOkusa.opis
-
-        holder.biljkaKorist1.text = biljke[position].jela[0]
+//potrebna bolja implementacija
+        holder.biljkaJelo1.text = biljke[position].jela[0]
         if(1<biljke[position].jela.size){
-            holder.biljkaKorist2.text = biljke[position].jela[1]
+            holder.biljkaJelo2.text = biljke[position].jela[1]
         }else {
-            holder.biljkaKorist2.text = "" }
+            holder.biljkaJelo2.text = "" }
         if(2<biljke[position].jela.size) {
-            holder.biljkaKorist3.text = biljke[position].jela[2]
+            holder.biljkaJelo3.text = biljke[position].jela[2]
         }else {
-            holder.biljkaKorist3.text = "" }
+            holder.biljkaJelo3.text = "" }
 
         val context: Context = holder.biljkaImage.context
         var id: Int = context.resources.getIdentifier(biljke[position].naziv, "drawable", context.packageName)
@@ -50,27 +50,6 @@ class KuharskiListAdapter(private var biljke : List<Biljka>, private val onItemC
 
         holder.itemView.setOnClickListener{ onItemClicked(biljke[position]) }
 
-    }
-
-     fun onClickUpdateBiljke(biljka: Biljka) {
-        var slicneBiljke : ArrayList<Biljka> = ArrayList()
-        slicneBiljke.add(biljka)
-        var jela :Boolean = false
-        for(i in biljke){
-            jela = false
-            if(i != biljka) {
-                for(j in i.jela){
-                    if(biljka.jela.contains(j)) {
-                        jela = true
-                        continue
-                    }
-                }
-                if(jela|| i.profilOkusa == biljka.profilOkusa){
-                    slicneBiljke.add(i)}
-            }
-        }
-        var listBiljke:List<Biljka> = slicneBiljke
-        updateBiljke(listBiljke)
     }
 
     fun dajListu():List<Biljka>{

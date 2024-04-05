@@ -9,7 +9,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.BEZUKUSNO,
         jela = listOf("Salata od paradajza", "Punjene tikvice"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUBTROPSKA),
-        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA)
+        zemljisniTipovi  = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA)
     ),
     Biljka(
         naziv = "Nana (Mentha spicata)",
@@ -19,7 +19,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.MENTA,
         jela = listOf("Jogurt sa voćem", "Gulaš"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.UMJERENA),
-        zemljaniTipovi = listOf(Zemljiste.GLINENO, Zemljiste.CRNICA)
+        zemljisniTipovi  = listOf(Zemljiste.GLINENO, Zemljiste.CRNICA)
     ),
     Biljka(
         naziv = "Kamilica (Matricaria chamomilla)",
@@ -29,7 +29,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.AROMATICNO,
         jela = listOf("Čaj od kamilice"),
         klimatskiTipovi = listOf(KlimatskiTip.UMJERENA, KlimatskiTip.SUBTROPSKA),
-        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.KRECNJACKO)
+        zemljisniTipovi  = listOf(Zemljiste.PJESKOVITO, Zemljiste.KRECNJACKO)
     ),
     Biljka(
         naziv = "Ružmarin (Rosmarinus officinalis)",
@@ -39,7 +39,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.AROMATICNO,
         jela = listOf("Pečeno pile", "Grah","Gulaš"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUHA),
-        zemljaniTipovi = listOf(Zemljiste.SLJUNKOVITO, Zemljiste.KRECNJACKO)
+        zemljisniTipovi  = listOf(Zemljiste.SLJUNKOVITO, Zemljiste.KRECNJACKO)
     ),
     Biljka(
         naziv = "Lavanda (Lavandula angustifolia)",
@@ -49,7 +49,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.AROMATICNO,
         jela = listOf("Jogurt sa voćem"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUHA),
-        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.KRECNJACKO)
+        zemljisniTipovi  = listOf(Zemljiste.PJESKOVITO, Zemljiste.KRECNJACKO)
     ),
     Biljka(
         naziv = "Peršun (Petroselinum crispum)",
@@ -59,7 +59,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.BEZUKUSNO,
         jela = listOf("Salata", "Juha/Supa", "Besamel umak", "Odrezak"),
         klimatskiTipovi = listOf(KlimatskiTip.UMJERENA),
-        zemljaniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.CRNICA)
+        zemljisniTipovi  =listOf(Zemljiste.ILOVACA, Zemljiste.CRNICA)
     ),
     Biljka(
         naziv = "Matičnjak (Melissa officinalis)",
@@ -69,7 +69,7 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.AROMATICNO,
         jela = listOf("Salata", "Juha/Supa", "Besamel umak", "Odrezak"),
         klimatskiTipovi = listOf(KlimatskiTip.UMJERENA),
-        zemljaniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.CRNICA)
+        zemljisniTipovi  =listOf(Zemljiste.ILOVACA, Zemljiste.CRNICA)
     ),
     Biljka(
         naziv = "Kurkuma (Curcuma longa)",
@@ -79,30 +79,30 @@ val biljke = listOf(
         profilOkusa = ProfilOkusaBiljke.GORKO,
         jela = listOf("Curry", "Juha/Supa", "Marinirana piletina s kurkumom i limunom", "Riža"),
         klimatskiTipovi = listOf(KlimatskiTip.TROPSKA),
-        zemljaniTipovi =listOf(Zemljiste.ILOVACA, Zemljiste.GLINENO)
+        zemljisniTipovi  =listOf(Zemljiste.ILOVACA, Zemljiste.GLINENO)
     ),
     Biljka(
         naziv = "Majčina dušica (Thymus serpyllum)",
-        porodica = " Lamiaceae (usnate)",
+        porodica = "Lamiaceae (usnate)",
         medicinskoUpozorenje = " Majčina dušica je sigurna za upotrebu.",
         medicinskeKoristi = listOf(MedicinskaKorist.PODRSKAIMUNITETU,MedicinskaKorist.SMIRENJE),
         profilOkusa = ProfilOkusaBiljke.GORKO,
         jela = listOf("Pasta","Lazanja","Pizza"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.UMJERENA),
-        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO)
+        zemljisniTipovi  = listOf(Zemljiste.PJESKOVITO)
     ),
     Biljka(
         naziv = "Origano (Origanum vulgare)",
-        porodica = " Lamiaceae (usnate)",
+        porodica = "Lamiaceae (usnate)",
         medicinskoUpozorenje = " Origano je obično siguran za upotrebu.",
         medicinskeKoristi = listOf(MedicinskaKorist.REGULACIJAPROBAVE,MedicinskaKorist.SMIRENJE),
         profilOkusa = ProfilOkusaBiljke.LJUTO,
         jela = listOf("Pizza","Lazanja","Lazanja"),
         klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.UMJERENA),
-        zemljaniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA)
+        zemljisniTipovi  = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA)
     )
 )
 
-
-
-
+fun dajBiljke():List<Biljka>{
+    return biljke
+}
