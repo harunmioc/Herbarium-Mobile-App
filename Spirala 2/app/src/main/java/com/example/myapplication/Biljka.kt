@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import java.io.Serializable
+
 data class Biljka(
     val naziv : String,
     val porodica : String,
