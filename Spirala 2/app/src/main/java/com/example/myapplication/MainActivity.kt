@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var botanickiAdapter : BotanickiListAdapter
     private var biljkeList = dajBiljke()
     private var sveBiljkeList : BiljkaSingleton = BiljkaSingleton
-
     private lateinit var spinoza: Spinner
     private lateinit var novaBiljkaButton: Button
 

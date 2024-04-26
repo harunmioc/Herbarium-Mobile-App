@@ -1,18 +1,24 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
-import android.os.Parcelable
-import android.view.View
-import android.widget.AdapterView
+import android.os.Environment
+import android.provider.MediaStore
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.math.absoluteValue
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.red
+import java.io.File
+import java.io.FileOutputStream
 
 
 class NovaBiljkaActivity : AppCompatActivity() {
@@ -28,15 +34,18 @@ class NovaBiljkaActivity : AppCompatActivity() {
     private lateinit var dodajJelo: Button
     private lateinit var dodajBiljku: Button
     private lateinit var uslikajBiljku: Button
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private lateinit var imageView: ImageView
+    var jelaList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nova_biljka)
-        var jelaList = ArrayList<String>()
+
         var isEditMode = false
         var editIndex = -1
 //dohvacanje id-eva
-        biljkaNaziv= findViewById(R.id.nazivET)
+        biljkaNaziv = findViewById(R.id.nazivET)
         biljkaPorodica = findViewById(R.id.porodicaET)
         biljkaMedicinskoUpozorenje = findViewById(R.id.medicinskoUpozorenjeET)
         biljkaJelo = findViewById(R.id.jeloET)
@@ -48,12 +57,44 @@ class NovaBiljkaActivity : AppCompatActivity() {
         dodajJelo = findViewById(R.id.dodajJeloBtn)
         dodajBiljku = findViewById(R.id.dodajBiljkuBtn)
         uslikajBiljku = findViewById(R.id.uslikajBiljkuBtn)
+        imageView = findViewById(R.id.imageView)
 
-        biljkaMedicinskaKorist.setAdapter(ArrayAdapter<MedicinskaKorist>(this, android.R.layout.simple_list_item_1, MedicinskaKorist.values()))
-        biljkaKlimatskiTip.setAdapter(ArrayAdapter<KlimatskiTip>(this, android.R.layout.simple_list_item_1, KlimatskiTip.values()))
-        biljkaZemljisniTip.setAdapter(ArrayAdapter<Zemljiste>(this, android.R.layout.simple_list_item_1, Zemljiste.values()))
-        biljkaProfilOkusa.setAdapter(ArrayAdapter<ProfilOkusaBiljke>(this, android.R.layout.simple_list_item_1, ProfilOkusaBiljke.values()))
-        biljkaJelaList.setAdapter(ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, jelaList))
+
+        biljkaMedicinskaKorist.setAdapter(
+            ArrayAdapter<MedicinskaKorist>(
+                this,
+                android.R.layout.select_dialog_multichoice,
+                MedicinskaKorist.values()
+            )
+        )
+        biljkaKlimatskiTip.setAdapter(
+            ArrayAdapter<KlimatskiTip>(
+                this,
+                android.R.layout.select_dialog_multichoice,
+                KlimatskiTip.values()
+            )
+        )
+        biljkaZemljisniTip.setAdapter(
+            ArrayAdapter<Zemljiste>(
+                this,
+                android.R.layout.select_dialog_multichoice,
+                Zemljiste.values()
+            )
+        )
+        biljkaProfilOkusa.setAdapter(
+            ArrayAdapter<ProfilOkusaBiljke>(
+                this,
+                android.R.layout.select_dialog_multichoice,
+                ProfilOkusaBiljke.values()
+            )
+        )
+        biljkaJelaList.setAdapter(
+            ArrayAdapter<String>(
+                this,
+                android.R.layout.select_dialog_multichoice,
+                jelaList
+            )
+        )
 
         biljkaMedicinskaKorist.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         biljkaKlimatskiTip.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -69,15 +110,17 @@ class NovaBiljkaActivity : AppCompatActivity() {
             dodajJelo.setText("Izmijeni jelo")
         }
 
-        uslikajBiljku.setOnClickListener{
-
+        uslikajBiljku.setOnClickListener {
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
         }
+
 
 
         dodajJelo.setOnClickListener {
             val newJelo = biljkaJelo.text.toString().trim()
-            if(!isEditMode){
-                if(newJelo.isNotEmpty()){
+            if (!isEditMode) {
+                if (newJelo.isNotEmpty()) {
                     if (jelaList.any { it.equals(newJelo.lowercase(), ignoreCase = true) }) {
                         // Ako je jelo već prisutno, prikazati poruku o grešci
                         Toast.makeText(this, "Ovo jelo već postoji!", Toast.LENGTH_SHORT).show()
@@ -87,14 +130,14 @@ class NovaBiljkaActivity : AppCompatActivity() {
                         //???????????????????????????????
                         biljkaJelo.setText("")
                     }
-                }else{
-                    Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Dodajte barem jedno jelo !", Toast.LENGTH_SHORT).show()
                 }
-            }else{
-                if(newJelo.isNotEmpty()){
+            } else {
+                if (newJelo.isNotEmpty()) {
                     jelaList[editIndex] = newJelo
                     (biljkaJelaList.adapter as ArrayAdapter<*>).notifyDataSetChanged()
-                }else{
+                } else {
                     jelaList.removeAt(editIndex)
                     (biljkaJelaList.adapter as ArrayAdapter<*>).notifyDataSetChanged()
                 }
@@ -106,30 +149,59 @@ class NovaBiljkaActivity : AppCompatActivity() {
         }
 
 
-        dodajBiljku.setOnClickListener{
-            val naziv = biljkaNaziv.text.toString().trim()
-            val porodica = biljkaPorodica.text.toString().trim()
-            val medicinskoUpozorenje = biljkaMedicinskoUpozorenje.text.toString().trim()
-            val jela = jelaList.toList()
-            val koristi : List<MedicinskaKorist> = checkedList(biljkaMedicinskaKorist)
-            val klima : List<KlimatskiTip> = checkedList(biljkaKlimatskiTip)
-            val zemlja : List<Zemljiste> = checkedList(biljkaZemljisniTip)
-            val okus  : ProfilOkusaBiljke= (biljkaProfilOkusa.adapter.getItem(biljkaProfilOkusa.checkedItemPosition) as ProfilOkusaBiljke)
-
-            if(validacija()){
-                val novaBiljka = Biljka(naziv, porodica, medicinskoUpozorenje, koristi, okus, jela, klima, zemlja)
-                BiljkaSingleton.addBiljka(novaBiljka)
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-
+        dodajBiljku.setOnClickListener {
+            if (validacijaPostoji()) {
+                System.out.println("uslo u prvu")
+                if (validacija()) {
+                    System.out.println("uspjesno")
+                    val naziv = biljkaNaziv.text.toString().trim()
+                    val porodica = biljkaPorodica.text.toString().trim()
+                    val medicinskoUpozorenje = biljkaMedicinskoUpozorenje.text.toString().trim()
+                    val jela = jelaList.toList()
+                    val koristi: List<MedicinskaKorist> = checkedList(biljkaMedicinskaKorist)
+                    val klima: List<KlimatskiTip> = checkedList(biljkaKlimatskiTip)
+                    val zemlja: List<Zemljiste> = checkedList(biljkaZemljisniTip)
+                    val okus = (biljkaProfilOkusa.adapter.getItem(biljkaProfilOkusa.checkedItemPosition) as ProfilOkusaBiljke)
+                    val novaBiljka = Biljka(naziv, porodica, medicinskoUpozorenje, koristi, okus, jela, klima, zemlja)
+                    if(!BiljkaSingleton.getSveBiljkeList().any { it.naziv.equals(novaBiljka.naziv, ignoreCase = true) }){
+                    BiljkaSingleton.addBiljka(novaBiljka)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)}
+                    else{
+                        Toast.makeText(this, "Biljka s tim nazivom već postoji!", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }else{
-                Toast.makeText(this, "Validation failed", Toast.LENGTH_SHORT).show()
+                System.out.println("erroririririr")
+                if (biljkaNaziv.text.toString().isBlank()) {
+                    Toast.makeText(this, "Naziv biljke prazan !", Toast.LENGTH_SHORT).show()
+                    biljkaNaziv.setError("Naziv biljke je obavezan")
+                }
+                if (biljkaPorodica.text.toString().isBlank()) {
+                    Toast.makeText(this, "Naziv porodice prazan !", Toast.LENGTH_SHORT).show()
+                    biljkaPorodica.setError("Naziv porodice je obavezan")
+                }
+                if (biljkaMedicinskoUpozorenje.text.toString().isBlank()) {
+                    Toast.makeText(this, "Medicinsko upozorenje prazno !", Toast.LENGTH_SHORT).show()
+                    biljkaMedicinskoUpozorenje.setError("Medicinsko upozorenje je obavezno")
+                }
             }
         }
-
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            imageView.setImageBitmap(imageBitmap)
+        }
+    }
+
+
+
+
     fun validacija(): Boolean {
+
         val naziv = biljkaNaziv.text.toString().trim()
         val porodica = biljkaPorodica.text.toString().trim()
         val medicinskoUpozorenje = biljkaMedicinskoUpozorenje.text.toString().trim()
@@ -138,13 +210,21 @@ class NovaBiljkaActivity : AppCompatActivity() {
         val brojZemlja = biljkaZemljisniTip.checkedItemCount
         val brojOkus = biljkaProfilOkusa.checkedItemCount
 
-
         return naziv.length in 2..20 && porodica.length in 2..20 &&
                 medicinskoUpozorenje.length in 2..20 && brojKoristi>0 &&
                 brojKlima>0 && brojOkus>0 && brojZemlja>0
-
-        TODO("dodaj errore")
     }
+
+    fun validacijaPostoji() : Boolean{
+        return biljkaNaziv.text.toString().isNotBlank() && biljkaPorodica.text.toString().isNotBlank() &&
+                biljkaMedicinskoUpozorenje.text.toString().isNotBlank() &&
+                biljkaMedicinskaKorist.checkedItemCount > 0 &&
+                biljkaKlimatskiTip.checkedItemCount > 0 &&
+                biljkaZemljisniTip.checkedItemCount > 0 &&
+                biljkaProfilOkusa.checkedItemCount > 0 &&
+                jelaList.size > 0
+    }
+
 
     inline fun <reified T> checkedList(listview: ListView): List<T> {
         val checkedPositions = listview.checkedItemPositions

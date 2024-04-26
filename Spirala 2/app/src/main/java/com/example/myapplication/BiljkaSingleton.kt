@@ -1,8 +1,9 @@
 package com.example.myapplication
 
+import android.graphics.Bitmap
+
 object BiljkaSingleton {
     private var sveBiljkeList =  presipanje()
-
     fun getSveBiljkeList(): ArrayList<Biljka> {
         return sveBiljkeList
     }
