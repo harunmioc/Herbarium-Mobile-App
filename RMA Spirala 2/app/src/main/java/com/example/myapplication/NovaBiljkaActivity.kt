@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -100,7 +101,8 @@ class NovaBiljkaActivity : AppCompatActivity() {
         biljkaKlimatskiTip.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         biljkaZemljisniTip.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         biljkaProfilOkusa.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
+        val defaultImage = BitmapFactory.decodeResource(resources, R.drawable.nana)
+        imageView.setImageBitmap(defaultImage)
 
         biljkaJelaList.setOnItemClickListener { parent, view, position, id ->
             val selectedItem = jelaList[position]
@@ -151,9 +153,7 @@ class NovaBiljkaActivity : AppCompatActivity() {
 
         dodajBiljku.setOnClickListener {
             if (validacijaPostoji()) {
-                System.out.println("uslo u prvu")
                 if (validacija()) {
-                    System.out.println("uspjesno")
                     val naziv = biljkaNaziv.text.toString().trim()
                     val porodica = biljkaPorodica.text.toString().trim()
                     val medicinskoUpozorenje = biljkaMedicinskoUpozorenje.text.toString().trim()
@@ -172,7 +172,6 @@ class NovaBiljkaActivity : AppCompatActivity() {
                     }
                 }
             }else{
-                System.out.println("erroririririr")
                 if (biljkaNaziv.text.toString().isBlank()) {
                     Toast.makeText(this, "Naziv biljke prazan !", Toast.LENGTH_SHORT).show()
                     biljkaNaziv.setError("Naziv biljke je obavezan")
