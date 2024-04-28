@@ -1,0 +1,2 @@
+jedan test je padao jer string koji je unesen u EditText je bio predug i naravno, nije uspjesno dodvanje.
+Ispravio sam to odmah poslije ali vrijeme je proslo, nadam se da cete uzeti to u obzir
