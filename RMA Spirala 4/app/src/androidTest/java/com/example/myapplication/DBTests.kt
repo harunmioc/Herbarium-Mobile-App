@@ -15,7 +15,6 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class DBTests {
 
-    // Testovi napravljeni po dokumentaciji
 
     private lateinit var userDao: BiljkaDAO
     private lateinit var db: BiljkaDatabase

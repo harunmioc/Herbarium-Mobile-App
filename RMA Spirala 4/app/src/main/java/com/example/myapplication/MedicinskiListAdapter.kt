@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MedicinskiListAdapter(private var biljke: List<Biljka>,private val biljkaRepository: BiljkaRepository, private val onItemClicked: (movie:Biljka) -> Unit) : RecyclerView.Adapter<MedicinskiListAdapter.BiljkaViewHolder>(){
@@ -54,6 +56,7 @@ class MedicinskiListAdapter(private var biljke: List<Biljka>,private val biljkaR
             .getIdentifier("nana", "drawable", context.packageName)
         holder.biljkaImage.setImageResource(id)*/
 
+        val scope = CoroutineScope(Job() + Dispatchers.Main)
         CoroutineScope(Dispatchers.Main).launch {
             val biljkaBitmap = biljke[position].id?.let {
                 biljkaRepository.getImage(it)

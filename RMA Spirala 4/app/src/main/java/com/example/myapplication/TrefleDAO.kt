@@ -72,14 +72,14 @@ class TrefleDAO(private var context :Context ?=null) {
 
                             bitmap
                         } else {
-                            System.out.println("imageURL prazan")
+                            //System.out.println("imageURL prazan")
                             defaultBitmap
                         }
                     } else {
                         defaultBitmap
                     }
                 } else {
-                    System.out.println("neuspjesan response")
+                    //System.out.println("neuspjesan response")
                     defaultBitmap
                 }
             } catch (e: Exception) {
